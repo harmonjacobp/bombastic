@@ -40,8 +40,17 @@ function start(server){
 		mysteriousTickingNoise.pause();
 		var game = document.getElementById("game");
 		game.parentNode.removeChild(game);	
-		var body = document.getElementsByTagName("body")[0];
-		body.innerHTML = '<h1>BOMBASTICALLY FANTASTIC!</h1><h2?You won the game!</h2><div id="Button"><button type="button">play again</button><audio id="music" src="boombastic.ogg" controls autoplay></audio>';
+	    var body = document.getElementsByTagName("body")[0];
+	    body.innerHTML = '<h1>BOMBASTICALLY FANTASTIC!</h1><h2?You won the game!</h2><div><img id="logo" src="Bombastic fun logo.png" style="transform:scale(3.5); margin: 90px;" /></div><div><h1 style="cursor: pointer; color: #333;" onclick="window.location.reload(true)" id="playagain">Play Again</h1><audio id="music" src="boombastic.ogg" controls autoplay></audio>';
+	    var t = 0;
+	    function playAgainRainbow(){
+		t += 0.1;
+		var text = document.getElementById('playagain');
+		if(text == null){return;}
+		text.style.color = 'rgb('+((Math.sin(t)*50+50)>>0)+','+((Math.sin(t+3.14/2)*50+50)>>0)+','+((Math.sin(t+3.14)*50+50)>>0)+')';
+		setTimeout(playAgainRainbow, 100);
+	    }
+	    playAgainRainbow();
 	}
 	function makeButtons(){
 		var button1 = document.createElement("");
@@ -194,7 +203,10 @@ function cutWire(wireInput, color){
 		server.send(JSON.stringify({cmd:'gameCutWire', modulePosition:modulePosition, wirePosition:wirePosition}));
 	}
 function clickButton(buttonId){
-		var modulePositionIndex = buttonId.indexOf('_')+1;
-		var modulePosition = parseInt(buttonId.substring(modulePositionIndex));
-		server.send(JSON.stringify({cmd:'gameClickButton', modulePosition:modulePosition}));
+    var modulePositionIndex = buttonId.indexOf('_')+1;
+    var modulePosition = parseInt(buttonId.substring(modulePositionIndex));
+    server.send(JSON.stringify({cmd:'gameClickButton', modulePosition:modulePosition}));
+    document.getElementById(buttonId).style.opacity = '0.8';
+    // for internet explorer
+    document.getElementById(buttonId).style.filter = 'alpha(opacity=80)';
 }
