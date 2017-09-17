@@ -1,0 +1,132 @@
+@font-face {
+    font-family: Pixel;
+    src: url(bulkypix.ttf);
+}
+body {
+	background-color: #A6694C
+}
+h1, h2, #waiting {
+  font-family: Pixel;
+  text-align: center;
+}
+h1, h2{
+	z-index: 100;
+}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+	
+	font-family: Pixel;
+}
+.startButton {
+  text-align: center;
+}
+#realStartButton {
+	font-family: Pixel;
+}
+.buttonModule {
+	position: absolute;
+	transform:scale(2.5,2.5);
+	cursor: pointer;
+}
+.buttonModle:hover{
+    
+}
+#buttonModule {
+	position:absolute;
+	top: 370px;
+	left: 190px;
+	
+	transform:scale(2.5,2.5);
+}
+.circuitBoard {
+	position: absolute;
+	transform:scale(2.5,2.5);
+}
+#circuitBoard {
+	position:absolute;
+	top: 370px;
+	left: 475px;
+	
+	transform:scale(2.5,2.5);
+}
+#bomb {
+	position:absolute;
+	top: 335px;
+	left: 375px;
+	z-index: -10;
+	
+	transform:scale(4,4);
+}
+.wire {
+	position:absolute;
+	transform:scale(2.1,2.1);
+	cursor: pointer;
+}
+.wireButton {
+	width: 100px;
+	height: 20px;
+}
+#text{
+	position:absolute;
+	top: 200px;
+	left: 745px;
+	width: 400px;
+	color: #00FF00;
+	font-family: Pixel;
+	z-index: 6;
+}
+#textBox {
+	position:absolute;
+	top: 350px;
+	left: 900px;
+	z-index: 4;
+	
+	transform:scale(6,6);
+}
+#music {
+	display: none;
+}
+#logo {
+	position: relative;
+	left: 46%;
+	margin: 30px;
+	transform:scale(2,2);
+}
+/*
+#first {
+	top: 403px;
+	left: 490px;
+	
+	transform:scale(2.1,2.1);
+}
+#second {
+	top: 433px;
+	left: 490px;
+	
+	transform:scale(2.1,2.1);
+}
+#third {
+	top: 473px;
+	left: 490px;
+	
+	transform:scale(2.1,2.1);
+}*/
+#playerList {
+	text-align: center;
+	font-family: Pixel;
+}
+#timer {
+	position:absolute;
+	top: 288px;
+	left: 278px;
+	
+	z-index: 100;
+	color: red;
+	font-family: Pixel;
+	font-size: 2.2em;
+}

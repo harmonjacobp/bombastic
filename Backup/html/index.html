@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>Bombastic</title>
+		<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+	</head>
+	<body>
+		<h1>BOMBASTIC</h1>
+		<span id="lobby">
+			<p id="waiting">Waiting for Players...</p>
+			
+			<div class="startButton">
+				<button onclick='startGame()' id='realStartButton' class="button">Press to Start Game</button>
+			</div>
+			
+			<div id='playerList'>
+			</div>
+			<script>
+			var server = new WebSocket("ws://www.bombastic.fun:8887/");
+			server.addEventListener("message",function (rawMsg){
+			console.log(rawMsg);
+				procMsg(JSON.parse(rawMsg.data))
+				});
+				function startGame(){
+					server.send(JSON.stringify({cmd:'startGame'}));
+				}
+				function times(xs, n){return n<1 ? '' : (xs+times(xs, n-1));}
+				function murderAllChildren(x){
+					while(x.children.length != 0){
+						x.removeChild(x.children[0]);
+					}
+				}
+				var dotThing = function(el, waitMsg, numDots){
+					if(!el.textContent.startsWith(waitMsg)){
+						return;
+					}
+					if(3 < ++numDots){numDots = 1;}
+					el.textContent = waitMsg+times('.', numDots);
+					setTimeout(function(){dotThing(el, waitMsg, numDots);}, 1000);
+				};
+				function procMsg(msg){
+				switch (msg.cmd){
+					case "updateLobby":
+						var playerList = msg.playerList;
+						var waiting = document.getElementById('waiting');
+						if(playerList.length == 0){
+							waitMsg = 'Reticulating Splines';
+							waiting.textContent = waitMsg+'...';
+
+							dotThing(waiting, waitMsg, 3);
+						}else{
+							waiting.textContent = playerList.length+' players';
+						}
+						if(playerList.length < 2){
+							document.getElementById('realStartButton').disabled = true;
+						}else{
+							document.getElementById('realStartButton').disabled = false;
+						}
+						listDiv = document.getElementById('playerList');
+						murderAllChildren(listDiv);
+						for(var i = 0; i < playerList.length; i++){
+							var name = document.createElement('p');
+							name.textContent = 'Agent ' + playerList[i];
+							listDiv.appendChild(name);
+						}
+						break;
+					case "gamePreparing":
+						var realStartButton = document.getElementById('realStartButton');
+						realStartButton.disabled = true;
+						realStartButton.textContent = "Preparing game...";
+						dotThing(realStartButton, "Preparing game", 3);
+						
+						start();
+						break;
+					}
+					}
+					procMsg({cmd:'updateLobby', playerList:[]});
+			</script>
+			<script src="moduleAssociation.js"></script>
+		</span>
+	</body>
+</html>
