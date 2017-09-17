@@ -1,0 +1,15 @@
+{
+  "name": "bombastic-fun",
+  "version": "9001.0.0",
+  "description": "it's kinda ok",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yo Mama",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.1",
+    "pg": "^7.3.0"
+  }
+}
